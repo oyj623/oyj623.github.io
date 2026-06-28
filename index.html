@@ -692,9 +692,9 @@ footer{border-top:1px solid var(--border);padding:30px 0;background:var(--bg-2)}
   <p class="seclabel reveal">// 07. contact</p>
   <h2 class="sec reveal">Let's build something with your data.</h2>
   <p class="lead reveal">Open to <b>Analytics / Data Lead</b> and <b>Data &amp; Analytics Consultant</b> roles. Whether you need someone to build the platform or advise the decisions on top of it — I'd love to talk.</p>
-  <a class="contact-mail mono reveal d1" href="/cdn-cgi/l/email-protection#c6a3a2abb3a8a2a9a8a1f7f7f4f386a1aba7afaae8a5a9abf9b5b3a4aca3a5b2fb8ea3aaaaa9e3f4f69fafe3f4f68cb3a8"><span class="__cf_email__" data-cfemail="f095949d859e949f9e97c1c1c2c5b0979d91999cde939f9d">[email&#160;protected]</span></a>
+  <a class="contact-mail mono reveal d1" href="#" data-u="edmundong1125" data-d="gmail.com" data-subj="Hello Yi Jun" aria-label="Email Ong Yi Jun">loading email…</a>
   <div class="contact-links reveal d1">
-    <a class="btn btn-ghost" href="/cdn-cgi/l/email-protection#3356575e465d575c5d540202010673545e525a5f1d505c5e0c404651595650470e7b565f5f5c1601036a5a16010379465d">
+    <a class="btn btn-ghost" href="#" data-u="edmundong1125" data-d="gmail.com" data-subj="Hello Yi Jun" data-fill="no">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
       Email
     </a>
@@ -749,13 +749,22 @@ footer{border-top:1px solid var(--border);padding:30px 0;background:var(--bg-2)}
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 (function(){
   "use strict";
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- year ---------- */
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  /* ---------- email assembly (defeats Cloudflare/GitHub obfuscation + spam bots) ---------- */
+  /* The address is never written as a literal "name@domain" in the HTML; it's rebuilt here. */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-u][data-d]"), function(el){
+    var addr = el.getAttribute("data-u") + String.fromCharCode(64) + el.getAttribute("data-d");
+    var subj = el.getAttribute("data-subj");
+    el.setAttribute("href", "mailto:" + addr + (subj ? "?subject=" + encodeURIComponent(subj) : ""));
+    if(el.getAttribute("data-fill") !== "no"){ el.textContent = addr; }
+  });
 
   /* ---------- theme toggle (in-memory) ---------- */
   var root = document.documentElement;

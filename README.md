@@ -100,6 +100,10 @@ Each section uses the pattern: `.seclabel` (mono `// NN. name`) → `h2.sec` hea
 - **Add a nav link / section:** add a `<section id="x" class="wrap">…</section>` following the seclabel→h2→lead pattern, then add `<a href="#x" data-spy="x">label</a>` to BOTH `.navlinks` and `.mobile-menu`. Scroll-spy and smooth-scroll work automatically.
 - **Change the accent color:** edit `--accent`, `--accent-soft`, and `--glow` on `:root` (and the light overrides). Don't touch individual elements.
 - **Change a résumé file:** update the `href` on the `.btn-resume` links in the hero and contact sections (and rename the PDF in the repo to match).
+- **Change the email address:** edit the `data-u` (username) and `data-d` (domain) attributes on the contact links — **never write the literal `name@domain` address into the HTML** (see Email handling below).
+
+### Email handling (anti-obfuscation)
+The email is **never** written as a literal `name@domain.com` in the markup. Cloudflare/GitHub Pages email obfuscation (and spam bots) scan the static file for that pattern and would hash it into `[email protected]`. Instead, the username and domain are stored in separate `data-u` and `data-d` attributes (no `@` between them), and a small script in the `<script>` block rebuilds the address at runtime (inserting `@` via `String.fromCharCode(64)`), setting both the `mailto:` href and the visible text. To change the address, edit those attributes only — keep the address out of the raw HTML.
 
 ### Conventions to keep
 - Use existing CSS tokens; don't introduce new hex values unless adding a token.
