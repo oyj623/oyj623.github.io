@@ -70,10 +70,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 /* ---------- layout ---------- */
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-section{position:relative;padding:96px 0;scroll-margin-top:78px}
-main > section{margin-top:34px;border-top:1px solid var(--border)}
-main > section.hero{margin-top:0;border-top:0}
-.seclabel{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:1px;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+section{position:relative;padding:96px 0;scroll-margin-top:92px}
+main > section.wrap{margin-top:34px;border-top:1px solid var(--border);padding-top:88px;padding-bottom:88px}
+main > section.hero{margin-top:0;border-top:0;padding-top:120px;padding-bottom:90px}
+.seclabel{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:1px;color:var(--accent);margin-bottom:22px;display:flex;align-items:center;gap:10px}
 .seclabel::before{content:"";width:26px;height:1px;background:var(--accent);opacity:.6}
 h2.sec{font-size:clamp(28px,4vw,40px);line-height:1.15;font-weight:600;letter-spacing:-.5px;margin-bottom:18px}
 .lead{color:var(--text-dim);max-width:680px;font-size:18px}
@@ -82,20 +82,24 @@ h2.sec{font-size:clamp(28px,4vw,40px);line-height:1.15;font-weight:600;letter-sp
 #bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
 .page{position:relative;z-index:1}
 
-/* ---------- nav ---------- */
-header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
-  background:color-mix(in srgb,var(--bg) 72%,transparent);
-  border-bottom:1px solid var(--border);transition:background .4s ease}
-.navin{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:15px;display:flex;align-items:center;gap:9px}
+/* ---------- nav: floating capsule ---------- */
+header.nav{position:fixed;top:16px;left:0;right:0;z-index:50;display:flex;justify-content:center;padding:0 16px;pointer-events:none}
+.navin{pointer-events:auto;display:flex;align-items:center;gap:8px;padding:8px 8px 8px 18px;max-width:100%;
+  border:1px solid var(--border-strong);border-radius:100px;
+  background:color-mix(in srgb,var(--surface) 80%,transparent);backdrop-filter:blur(16px);
+  box-shadow:0 14px 44px -18px rgba(0,0,0,.7);transition:background .4s ease,box-shadow .3s ease}
+[data-theme="light"] .navin{box-shadow:0 14px 40px -20px rgba(31,56,100,.35)}
+.brand{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:13.5px;display:flex;align-items:center;gap:8px;margin-right:6px;white-space:nowrap}
 .brand .dot{color:var(--accent)}
-.navlinks{display:flex;align-items:center;gap:6px}
-.navlinks a{font-family:"JetBrains Mono",monospace;font-size:13.5px;color:var(--text-dim);padding:8px 12px;border-radius:7px;transition:color .2s,background .2s}
-.navlinks a:hover{color:var(--text);background:var(--accent-soft)}
-.navtools{display:flex;align-items:center;gap:10px}
-.iconbtn{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--border-strong);border-radius:9px;background:transparent;color:var(--text-dim);cursor:pointer;transition:.2s}
+.navlinks{display:flex;align-items:center;gap:2px}
+.navlinks a{font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--text-dim);padding:8px 13px;border-radius:100px;transition:color .2s,background .2s;white-space:nowrap}
+.navlinks a:hover{color:var(--text);background:rgba(120,165,225,.10)}
+.navlinks a.on{color:#04121a;background:var(--accent);font-weight:500}
+[data-theme="light"] .navlinks a.on{color:#fff}
+.navtools{display:flex;align-items:center;gap:8px;margin-left:4px}
+.iconbtn{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--border-strong);border-radius:100px;background:transparent;color:var(--text-dim);cursor:pointer;transition:.2s}
 .iconbtn:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
-.iconbtn svg{width:18px;height:18px}
+.iconbtn svg{width:17px;height:17px}
 .theme-light-icon{display:none}
 [data-theme="light"] .theme-dark-icon{display:none}
 [data-theme="light"] .theme-light-icon{display:block}
@@ -329,7 +333,8 @@ footer{border-top:1px solid var(--border);padding:30px 0;background:var(--bg-2)}
 @media(max-width:600px){
   body{font-size:16px}
   section{padding:74px 0}
-  main > section{margin-top:22px}
+  main > section.wrap{margin-top:22px;padding-top:64px;padding-bottom:64px}
+  main > section.hero{padding-top:96px;padding-bottom:72px}
   .proj-grid{grid-template-columns:1fr}
   .modal-metrics{grid-template-columns:1fr 1fr}
   .hero{padding-top:96px}
@@ -360,12 +365,12 @@ footer{border-top:1px solid var(--border);padding:30px 0;background:var(--bg-2)}
   <div class="navin">
     <a class="brand" href="#top" aria-label="Ong Yi Jun — home"><span class="dot mono">&gt;_</span>ong_yi_jun</a>
     <nav class="navlinks" aria-label="Primary">
-      <a href="#about">// about</a>
-      <a href="#skills">// skills</a>
-      <a href="#architecture">// architecture</a>
-      <a href="#projects">// projects</a>
-      <a href="#experience">// experience</a>
-      <a href="#contact">// contact</a>
+      <a href="#about" data-spy="about">about</a>
+      <a href="#skills" data-spy="skills">skills</a>
+      <a href="#architecture" data-spy="architecture">architecture</a>
+      <a href="#projects" data-spy="projects">work</a>
+      <a href="#experience" data-spy="experience">experience</a>
+      <a href="#contact" data-spy="contact">contact</a>
     </nav>
     <div class="navtools">
       <button class="iconbtn" id="theme-toggle" aria-label="Toggle colour theme" title="Toggle theme">
@@ -417,7 +422,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;background:var(--bg-2)}
     </a>
   </div>
   <div class="resume-row reveal in d3">
-    <a class="btn-resume" href="./Ong Yi Jun Resume 20260627 DA.pdf" download>
+    <a class="btn-resume" href="./Ong_Yi_Jun_Resume_Analytics_Data_Lead.pdf" download>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
       <span>Résumé — Data/Analytics Lead<small>PDF · technical depth + leadership</small></span>
     </a>
@@ -687,9 +692,9 @@ footer{border-top:1px solid var(--border);padding:30px 0;background:var(--bg-2)}
   <p class="seclabel reveal">// 07. contact</p>
   <h2 class="sec reveal">Let's build something with your data.</h2>
   <p class="lead reveal">Open to <b>Analytics / Data Lead</b> and <b>Data &amp; Analytics Consultant</b> roles. Whether you need someone to build the platform or advise the decisions on top of it — I'd love to talk.</p>
-  <a class="contact-mail mono reveal d1" href="/cdn-cgi/l/email-protection#482d2c253d262c27262f79797a7d082f25292124662b2725773b3d2a222d2b3c75002d2424276d7a7811216d7a78023d26"><span class="__cf_email__" data-cfemail="0c69686179626863626b3d3d3e394c6b616d6560226f6361">[email&#160;protected]</span></a>
+  <a class="contact-mail mono reveal d1" href="/cdn-cgi/l/email-protection#c6a3a2abb3a8a2a9a8a1f7f7f4f386a1aba7afaae8a5a9abf9b5b3a4aca3a5b2fb8ea3aaaaa9e3f4f69fafe3f4f68cb3a8"><span class="__cf_email__" data-cfemail="f095949d859e949f9e97c1c1c2c5b0979d91999cde939f9d">[email&#160;protected]</span></a>
   <div class="contact-links reveal d1">
-    <a class="btn btn-ghost" href="/cdn-cgi/l/email-protection#3257565f475c565d5c550303000772555f535b5e1c515d5f0d414750585751460f7a575e5e5d1700026b5b17000278475c">
+    <a class="btn btn-ghost" href="/cdn-cgi/l/email-protection#3356575e465d575c5d540202010673545e525a5f1d505c5e0c404651595650470e7b565f5f5c1601036a5a16010379465d">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
       Email
     </a>
@@ -781,6 +786,44 @@ footer{border-top:1px solid var(--border);padding:30px 0;background:var(--bg-2)}
   } else {
     revealEls.forEach(function(el){ el.classList.add("in"); });
   }
+
+  /* ---------- scroll-spy: highlight active section in the capsule ---------- */
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('.navlinks a[data-spy]'));
+    var byId = {};
+    var sections = [];
+    links.forEach(function(a){
+      var sec = document.getElementById(a.getAttribute('data-spy'));
+      if(sec){ byId[sec.id] = a; sections.push(sec); }
+    });
+    if(!sections.length) return;
+    function setActive(id){
+      links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('data-spy') === id); });
+    }
+    if("IntersectionObserver" in window){
+      var visible = {};
+      var spy = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting) visible[e.target.id] = e.intersectionRatio;
+          else delete visible[e.target.id];
+        });
+        // pick the section nearest the top that's currently in view
+        var best = null, bestTop = Infinity;
+        sections.forEach(function(s){
+          if(visible[s.id] != null){
+            var t = Math.abs(s.getBoundingClientRect().top - 90);
+            if(t < bestTop){ bestTop = t; best = s.id; }
+          }
+        });
+        if(best) setActive(best);
+      }, { rootMargin: "-88px 0px -55% 0px", threshold: [0, 0.25, 0.6] });
+      sections.forEach(function(s){ spy.observe(s); });
+      // bottom-of-page edge case: force contact active when scrolled to end
+      window.addEventListener('scroll', function(){
+        if(window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) setActive('contact');
+      }, { passive: true });
+    }
+  })();
 
   /* ---------- projects data + cards + modal ---------- */
   var projects = [
